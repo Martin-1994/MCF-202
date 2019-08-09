@@ -34,3 +34,28 @@ summary(lm.erup)
 length(erupciones$eruptions)
 y.60 <- -1.87 + 0.7*60
 y.60
+
+
+# Datos de regresion ------------------------------------------------------
+
+espera <- erupciones$waiting
+duracion<-erupciones$eruptions
+res <- resid(lm.erup)
+pre <- fitted(lm.erup)
+res.2 <-res^2
+
+cuadro <- round(data.frame(espera,duracion,pre,res,res.2),4)
+
+SSE <- sum(cuadro$res.2)
+SSE
+
+vari <- SSE/(length(erupciones$waiting)-2)
+vari
+
+
+# Prueba de hipotesis de la regresion -------------------------------------
+
+an.erup <- anova(lm.erup)
+an.erup
+
+# Se acepta Ha la regresion se puede aplicar debido a < 2.2e-16
